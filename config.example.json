@@ -1,0 +1,23 @@
+{
+  "ImageTwist": {
+    "auth": {
+      "username": "",
+      "password": ""
+    },
+    "domain": ""
+  },
+  "Reddit": {
+    "subreddit": "",
+    "url_filter": ""
+  },
+  "Tumblr": {
+    "auth": {
+      "consumer_key": "",
+      "consumer_secret": "",
+      "oauth_token": "",
+      "oauth_token_secret": ""
+    },
+    "blog": "",
+    "tags": ""
+  }
+}
