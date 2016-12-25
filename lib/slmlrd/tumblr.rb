@@ -65,7 +65,7 @@ module Slmlrd
       @client.followers(blog)
     end
 
-    def dashboard(user)
+    def dashboard
       @client.dashboard
     end
 
