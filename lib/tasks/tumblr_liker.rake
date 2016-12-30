@@ -14,6 +14,7 @@ namespace :slmlrd do
     tumblr = Slmlrd::Tumblr.new(config.data['tumblr']['auth'])
 
     puts 'Tumblr: Getting the dashboard...'
+    blog = config.data['tumblr']['blog']
     min_notes = config.data['tumblr']['like_min_notes']
     max_notes = config.data['tumblr']['like_max_notes']
     tumblr.dashboard['posts'].each do |post|
