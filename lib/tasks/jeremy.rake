@@ -82,7 +82,10 @@ namespace :slmlrd do
     puts 'Tumblr: Creating text post'
     tags = config.data['tumblr']['tags']
     source = images[0]
-    puts "  Posting '#{caption}' '#{tags}' Source: '#{source}' Link: '#{short_url}"
+    puts "  Caption: '#{caption}'"
+    puts "  Tags: '#{tags}'"
+    puts "  Source: '#{source}'"
+    puts "  Link: '#{short_url}"
     tumblr.create_photo_post(
       config.data['tumblr']['blog'],
       caption,
