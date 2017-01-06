@@ -11,15 +11,15 @@ module Slmlrd
         )
       end
 
-      def push
+      def push(app)
         file = File.read(config_path)
         encoded = Base64.encode64(file)
         raise "Config > #{MAX_BYTES}b" if encoded.bytesize > MAX_BYTES
-        `heroku config:set SLMLRD='#{encoded}'`
+        `heroku config:set SLMLRD='#{encoded}' --app #{app}`
       end
 
-      def pull
-        encoded = `heroku config:get SLMLRD`
+      def pull(app)
+        encoded = `heroku config:get SLMLRD --app #{app}`
         decoded = Base64.decode64(encoded)
         open(config_path, 'w') do |f|
           f.puts decoded
