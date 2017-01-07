@@ -67,6 +67,9 @@ module Slmlrd
         cookies: @cookies_hash
       )
       raise Exceptions::ResponseCodeError, resp.code unless resp.code == 200
+      if resp.body.include? 'ERROR: Server don\\\'t allow uploads at the moment'
+        raise Exceptions::UploadFailed
+      end
     end
 
     def session_id
