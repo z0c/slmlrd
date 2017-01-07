@@ -7,6 +7,7 @@ module Slmlrd
   class ImageTwist
     HOME_URL = 'http://imagetwist.com/'.freeze
     UPLOAD_URL_GALLERY = 'http://img114.imagetwist.com/cgi-bin/upload.cgi?upload_id=124684505799&js_on=1&utype=reg&upload_type=url'.freeze
+    UPLOAD_ERROR_TEXT = 'ERROR: Server don\\\'t allow uploads at the moment'.freeze
 
     def initialize(config)
       @username = config['username']
@@ -67,9 +68,7 @@ module Slmlrd
         cookies: @cookies_hash
       )
       raise Exceptions::ResponseCodeError, resp.code unless resp.code == 200
-      if resp.body.include? 'ERROR: Server don\\\'t allow uploads at the moment'
-        raise Exceptions::UploadFailed
-      end
+      raise Exceptions::UploadFailed resp.body.include? UPLOAD_ERROR_TEXT
     end
 
     def session_id
