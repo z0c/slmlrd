@@ -68,7 +68,7 @@ module Slmlrd
         cookies: @cookies_hash
       )
       raise Exceptions::ResponseCodeError, resp.code unless resp.code == 200
-      raise Exceptions::UploadFailed resp.body.include? UPLOAD_ERROR_TEXT
+      raise Exceptions::UploadFailed if resp.body.include? UPLOAD_ERROR_TEXT
     end
 
     def session_id
