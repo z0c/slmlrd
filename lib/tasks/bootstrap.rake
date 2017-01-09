@@ -19,7 +19,7 @@ namespace 'slmlrd:bootstrap' do
     puts ' -> Resources'
     puts '	Free Dynos -> web -> disable'
     puts '	Heroku Scheduler -> Add new job'
-    puts '		rake slmlrd:jeremy'
+    puts '		rake slmlrd:theresa'
     puts '		Free, Hourly'
     puts ''
     puts 'Done!'
