@@ -1,4 +1,3 @@
-require_relative '../slmlrd/bitly'
 require_relative '../slmlrd/config'
 require_relative '../slmlrd/image_twist'
 require_relative '../slmlrd/imgur'
@@ -67,22 +66,17 @@ namespace :slmlrd do
     caption = normalizer.normalize_title(post['title'])
     puts "  new title: #{caption}"
 
-    puts 'Bitly: Shorten url for folder'
-    short_url = bitly.shorten(folder['href']).short_url
-    puts "  Short url: #{short_url}"
-
     puts 'Tumblr: Creating text post'
     tags = config.data['tumblr']['tags']
     source = images[0]
     puts "  Caption: '#{caption}'"
     puts "  Tags: '#{tags}'"
     puts "  Source: '#{source}'"
-    puts "  Link: '#{short_url}"
     tumblr.create_photo_post(
       config.data['tumblr']['blog'],
       caption,
       source,
-      short_url,
+      '',
       tags
     )
   end
