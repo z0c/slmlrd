@@ -37,17 +37,18 @@ module Slmlrd
     end
 
     def create_text_post(blog, title, body, tags)
-      @client.create_post(
+      result = @client.create_post(
         :text,
         blog,
         title: title,
         body: body,
         tags: tags
       )
+      raise result['errors'].to_s if result['status'] != 200
     end
 
     def create_photo_post(blog, caption, source, link, tags)
-      @client.create_post(
+      result = @client.create_post(
         :photo,
         blog,
         caption: caption,
@@ -55,6 +56,7 @@ module Slmlrd
         link: link,
         tags: tags
       )
+      raise result['errors'].to_s if result['status'] != 200
     end
 
     def delete_post(blog, id)
