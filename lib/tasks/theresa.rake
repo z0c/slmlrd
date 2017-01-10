@@ -15,7 +15,6 @@ namespace :slmlrd do
 
     puts 'Initializing...'
     config = Config.new
-    bitly = Slmlrd::Bitly.new(config.data['bitly']['auth'])
     image_twist = ImageTwist.new(config.data['image_twist']['auth'])
     imgur = Imgur.new
     normalizer = Normalizer.new
@@ -69,6 +68,7 @@ namespace :slmlrd do
     puts 'Tumblr: Creating text post'
     tags = config.data['tumblr']['tags']
     source = images[0]
+    puts "  Blog: #{config.data['tumblr']['blog']}"
     puts "  Caption: '#{caption}'"
     puts "  Tags: '#{tags}'"
     puts "  Source: '#{source}'"
