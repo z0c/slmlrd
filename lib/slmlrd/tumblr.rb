@@ -44,7 +44,7 @@ module Slmlrd
         body: body,
         tags: tags
       )
-      raise result['errors'].to_s if result['status'] != 200
+      raise result['errors'].to_s unless result['status'].nil?
     end
 
     def create_photo_post(blog, caption, source, link, tags)
@@ -56,7 +56,7 @@ module Slmlrd
         link: link,
         tags: tags
       )
-      raise result['errors'].to_s if result['status'] != 200
+      raise result['errors'].to_s unless result['status'].nil?
     end
 
     def delete_post(blog, id)
