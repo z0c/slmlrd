@@ -16,6 +16,7 @@ module Slmlrd
         encoded = Base64.encode64(file)
         raise "Config > #{MAX_BYTES}b" if encoded.bytesize > MAX_BYTES
         `heroku config:set SLMLRD='#{encoded}' --app #{app}`
+        puts "Config #{encoded.bytesize} of #{MAX_BYTES} bytes taken."
       end
 
       def pull(app)
