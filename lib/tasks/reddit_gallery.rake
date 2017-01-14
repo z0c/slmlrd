@@ -29,7 +29,8 @@ namespace :slmlrd do
     puts 'Reddit: Get posts...'
     posts = reddit.get_posts(
       profile['reddit']['subreddit'],
-      Regexp.new(Regexp.quote(profile['reddit']['url_filter']))
+      Regexp.new(Regexp.quote(profile['reddit']['url_filter'])),
+      0
     )
     posts.each { |post| puts "  #{post}" }
 
