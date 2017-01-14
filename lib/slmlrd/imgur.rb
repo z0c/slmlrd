@@ -6,6 +6,7 @@ module Slmlrd
   # Imgur helper
   class Imgur
     def get_images_from_gallery(source_uri)
+      return [source_uri.to_s] if is_image?(source_uri)
       resp = RestClient.get(source_uri.to_s)
       raise Exceptions::ResponseCodeError, resp.code unless resp.code == 200
       page = Nokogiri::HTML(resp.body)
@@ -13,6 +14,12 @@ module Slmlrd
     end
 
     private
+
+    def is_image?(uri)
+      return true if uri.to_s.end_with? ".jpg"
+      return true if uri.to_s.end_with? ".png"
+      false
+    end
 
     def parse_images_in_page(page)
       urls = []

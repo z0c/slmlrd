@@ -6,7 +6,7 @@ include Slmlrd
 
 namespace :slmlrd do
   desc 'view posts on reddit'
-  task :view_reddit_posts, [:profile] do |_t, args|
+  task :reddit_view, [:profile] do |_t, args|
     Splash.new.do_it
 
     puts 'Initializing...'
@@ -20,7 +20,8 @@ namespace :slmlrd do
     puts 'Reddit: Get posts...'
     posts = reddit.get_posts(
       profile['reddit']['subreddit'],
-      /^http/
+      /^http/,
+      0
     )
     posts.each { |post| puts "  #{post}" }
   end

@@ -8,10 +8,11 @@ module Slmlrd
     HOME_URL = 'https://www.reddit.com/r/'.freeze
     USER_AGENT = 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0; Trident/5.0; Trident/5.0)'.freeze
 
-    def get_posts(subreddit, url_filter)
+    def get_posts(subreddit, url_filter, min_score)
       json = fetch_content_json(subreddit)
       filtered = filter_by_url(json, url_filter)
-      sorted = sort_by_score(filtered)
+      enough_score = filter_by_score(json, min_score)
+      sorted = sort_by_score(enough_score)
       build_hash(sorted)
     end
 
@@ -30,6 +31,13 @@ module Slmlrd
       return json if url_filter.nil?
       json['data']['children'].select do |c|
         url_filter.match(c['data']['url'])
+      end
+    end
+
+    def filter_by_score(json, min_score)
+      return json if min_score.nil?
+      json['data']['children'].select do |c|
+        c['data']['score'] >= min_score
       end
     end
 
