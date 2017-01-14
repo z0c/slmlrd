@@ -27,6 +27,7 @@ module Slmlrd
     end
 
     def filter_by_url(json, url_filter)
+      return json if url_filter.nil?
       json['data']['children'].select do |c|
         url_filter.match(c['data']['url'])
       end
@@ -41,7 +42,11 @@ module Slmlrd
     def build_hash(json)
       store = {}
       json.each do |child|
-        store[child['data']['url'].rpartition('/').last] = {
+        id = child['data']['url']
+        id = id.rpartition('/').last if id.include?('/')
+        id = id.rpartition('.').first if id.include?('.')
+        store[id] = {
+          'score' => child['data']['score'],
           'title' => child['data']['title'],
           'url' => child['data']['url']
         }
