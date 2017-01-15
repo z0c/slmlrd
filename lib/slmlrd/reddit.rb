@@ -11,7 +11,7 @@ module Slmlrd
     def get_posts(subreddit, url_filter, min_score)
       json = fetch_content_json(subreddit)
       filtered = filter_by_url(json, url_filter)
-      enough_score = filter_by_score(json, min_score)
+      enough_score = filter_by_score(filtered, min_score)
       sorted = sort_by_score(enough_score)
       build_hash(sorted)
     end
