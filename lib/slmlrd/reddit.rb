@@ -36,7 +36,7 @@ module Slmlrd
 
     def filter_by_score(json, min_score)
       return json if min_score.nil?
-      json['data']['children'].select do |c|
+      json.select do |c|
         c['data']['score'] >= min_score
       end
     end
