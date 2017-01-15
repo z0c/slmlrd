@@ -13,7 +13,7 @@ namespace :slmlrd do
   task :reddit_to_tumblr, [:profile] do |_t, args|
     Splash.new.do_it
 
-    puts 'Initializing...'
+    puts 'Initializing reddit_to_tumblr ...'
     config = Config.new
     image_twist = ImageTwist.new(config.data['image_twist']['auth'])
     imgur = Imgur.new
