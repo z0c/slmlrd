@@ -16,9 +16,11 @@ module Slmlrd
     end
 
     def login
+      resp = RestClient.get(HOME_URL)
       RestClient.post(
         HOME_URL,
-        login_params
+        login_params,
+        :cookies => resp.cookies
       ) do |resp, _request, _result, &_block|
         raise Exceptions::LoginError unless resp.code == 302
         @cookies_hash = resp.cookies
