@@ -1,5 +1,6 @@
 require_relative 'exceptions'
 require 'json'
+require 'nokogiri'
 require 'rest-client'
 
 module Slmlrd
@@ -14,6 +15,22 @@ module Slmlrd
       enough_score = filter_by_score(filtered, min_score)
       sorted = sort_by_score(enough_score)
       build_hash(sorted)
+    end
+
+    def get_subreddits url
+      resp = RestClient.get(
+        url,
+        user_agent: USER_AGENT
+      )
+      raise Exceptions::ResponseCodeError, resp.code unless resp.code == 200
+      subreddits = []
+      Nokogiri::HTML(resp.body).css('div.md.wiki').map.each do |c|
+        c.css('a').map do |n|
+          sr = n.text.strip.downcase
+          subreddits.push(sr.split('/')[2]) if sr.start_with?('/r/')
+        end
+      end
+      subreddits
     end
 
     private
