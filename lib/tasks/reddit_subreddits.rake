@@ -17,7 +17,14 @@ namespace :slmlrd do
     posts = reddit.get_subreddits(args[:url])
 
     posts.each do |subreddit|
-      puts subreddit unless config.data['profiles'].key?(subreddit) 
+      unless config.data['profiles'].key?(subreddit)
+        print <<-eos
+    "#{subreddit}": {
+      "reddit": { "subreddit": "#{subreddit}", "min_score": 0 },
+      "tumblr": { "tags": "" }
+    },
+eos
+      end
     end
   end
 end
